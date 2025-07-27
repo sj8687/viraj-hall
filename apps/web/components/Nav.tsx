@@ -171,7 +171,7 @@ export function Navbar() {
           {navLinks.map(({ href, label }) => (
             <Link
               key={href}
-              className={`hover:shadow-lg px-4 py-1 hover:bg-gray-100 hover:rounded-lg menus ${isActive(href)
+              className={`hover:shadow-lg px-4 py-1 hover:bg-gray-200 hover:rounded-lg menus ${isActive(href)
                 ? "underline decoration-2 underline-offset-8"
                 : ""
                 }`}
