@@ -32,22 +32,22 @@ export default function MyBookings() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { data: authData, status } = useSession();
-  const [token, setToken] = useState<string>();
+  // const [token, setToken] = useState<string>();
 
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const response = await axios.get("/api/token"); // ✔️ axios call
-        console.log("Token from API:", response.data.token);
-        setToken(response.data.token);
-      } catch (err) {
-        console.error("Error fetching token:", err);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchToken = async () => {
+  //     try {
+  //       const response = await axios.get("/api/token"); // ✔️ axios call
+  //       console.log("Token from API:", response.data.token);
+  //       setToken(response.data.token);
+  //     } catch (err) {
+  //       console.error("Error fetching token:", err);
+  //     }
+  //   };
 
-    fetchToken();
-  }, []);
+  //   fetchToken();
+  // }, []);
 
 
   useEffect(() => {
@@ -60,19 +60,21 @@ export default function MyBookings() {
 
 
   useEffect(() => {
-    if (!token) return;
+    // if (!token) return;
 
     const fetchBookings = async () => {
       setLoading(true);
       try {
-        console.log("Fetching with token:", token);
+        // console.log("Fetching with token:", token);
 
         const { data } = await axios.get(
           `${process.env.NEXT_PUBLIC_Backend_URL}/show/show`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+            // headers: {
+            //   Authorization: `Bearer ${token}`,
+            // },
+
+            withCredentials:true
           }
         );
         setBookings(data);
@@ -90,8 +92,8 @@ export default function MyBookings() {
       }
     };
 
-    fetchBookings(); // ✅ only when token is ready
-  }, [token]);
+    fetchBookings(); 
+  }, []);
 
   return (
     <div className="min-h-screen max-w-[1250px] mx-auto px-4 py-8 mt-[80px] flex flex-col">
@@ -127,14 +129,13 @@ export default function MyBookings() {
                 key={booking.id}
                 className="grid grid-cols-1 md:grid-cols-12 md:gap-4 border-b pb-6"
               >
-                {/* Venue column (5/12) */}
-                {/* Venue column (5/12) */}
+              
                 <div className="col-span-5 flex flex-col md:flex-row md:items-center gap-4">
                   <Image
                     src="/hall.jpg"
                     alt="Hall"
-                    width={112}   // same as md:w-28
-                    height={96}   // same as md:h-24
+                    width={112}   
+                    height={96}  
                     className="w-full h-40 md:w-28 md:h-24 object-cover rounded"
                   />
                   <div className="text-center md:text-left">
@@ -153,7 +154,6 @@ export default function MyBookings() {
                   </div>
                 </div>
 
-                {/* Date & Time column (4/12) */}
                 <div className="col-span-4 flex flex-col justify-center gap-2 text-sm text-gray-700 mt-4 md:mt-0 text-center md:text-left">
                   <p>
                     <strong>Check-In:</strong> {formatDate(booking.date)}
