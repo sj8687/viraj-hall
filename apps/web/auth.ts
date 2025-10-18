@@ -124,7 +124,7 @@ const config: NextAuthConfig = {
       return session;
     },
 
-    
+
     async jwt({ token }) {
       const existing_user = await axios.post(
         `${process.env.NEXT_PUBLIC_Backend_URL}/add/verify`,
@@ -155,7 +155,7 @@ const config: NextAuthConfig = {
         domain:
           process.env.NODE_ENV === "development"
             ? undefined
-            : ".viraj-multipurpose-hall.vercel.app",
+            : ".render.com",
       },
     },
   },
