@@ -48,7 +48,7 @@ bug.post('/bug-report',userMiddleware, cloudinaryUploader.single('screenshot'), 
        res.status(400).json({ error: 'Image must be less than 1MB!' });
        return
     }
-    res.status(500).json({ error: 'Something went wrong' });
+    res.status(500).json({ error: 'Something went wrong ohh' });
   }
 });
 
