@@ -155,7 +155,7 @@ const config: NextAuthConfig = {
         domain:
           process.env.NODE_ENV === "development"
             ? undefined
-            : ".render.com",
+            : undefined,
       },
     },
   },
