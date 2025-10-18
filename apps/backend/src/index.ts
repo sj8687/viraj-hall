@@ -6,7 +6,6 @@ import cookieParser from "cookie-parser";
 import { OTP } from "./routes/sendotp";
 import { booking } from "./routes/check";
 import { payment } from "./routes/payment";
-import { show } from "./routes/show";
 import { adminbooking } from "./Admin/allbooking";
 import { contact } from "./routes/contact";
 import { addUser } from "./routes/login";
@@ -15,6 +14,7 @@ import { graph } from "./Admin/graph";
 import { allusers } from "./Admin/allusers";
 import "./routes/corn";
 import { generalLimiter } from "./routes/ratelimit";
+import { show } from "./routes/show";
 
 dotenv.config();
 
