@@ -15,14 +15,15 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
+   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   name      String?
   email     String   @unique
   password  String?
   image     String?
   googleId  String?
-  role      Role     @default(USER) 
+  role      String  @default("user")
+ 
 
 
   bookings  Booking[]

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { middleware } from "../middleware/token";
+import { middleware } from "../middleware/adminmiddle";
 import { prisma } from "@repo/db";
 
 export const allusers = Router();

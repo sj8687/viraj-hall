@@ -11,6 +11,9 @@ import { useSession } from "next-auth/react";
 
 export function Navbar() {
   const { data: authData, status } = useSession();
+
+  console.log(authData);
+
   const pathname = usePathname();
 
   const t1 = useRef<gsap.core.Timeline | null>(null);
@@ -186,20 +189,22 @@ export function Navbar() {
           {/* Only render after session is loaded */}
           {status === "loading" ? null : (
             <>
-              {authData && !(authData.user as any)?.isAdmin && (
+              {authData && authData.user?.role !== "admin" && (
                 <Link href="/booking/Show">
                   <button className="bg-black signbarsdiv text-[15px] p-2 px-4 border font-medium hover:border-blue-500 text-white rounded-lg">
                     Bookings
                   </button>
                 </Link>
               )}
-              {authData && (authData.user as any)?.isAdmin && (
+
+              {authData && authData.user?.role === "admin" && (
                 <Link href="/AdminDash/Admin">
-                  <button className="bg-black signbarsdiv  text-[15px] p-2 px-4 border font-medium hover:border-red-500 text-white rounded-lg">
+                  <button className="bg-black signbarsdiv text-[15px] p-2 px-4 border font-medium hover:border-red-500 text-white rounded-lg">
                     Admin Panel
                   </button>
                 </Link>
               )}
+
               {authData ? (
                 <Profile authData={authData.user} />
               ) : (

@@ -1,120 +1,128 @@
-import express, { Router } from "express";
-import bcrypt from "bcryptjs";
 import { prisma } from "@repo/db";
-import { loginSchema } from "@repo/zod";
-import { registerSchema } from "@repo/zod";
+import { registerSchema, verifyuser } from "@repo/zod";
+import { Request, Response, Router } from "express";
+import bcrypt from "bcryptjs";
 
-export const login = Router();
+export const addUser = Router();
 
-// POST /login/validate
-login.post("/validate", async (req, res) => {
+addUser.post("/user", async (req: Request, res: Response) => {
   try {
-    const { email, password } = req.body;
-
-    const valid = loginSchema.safeParse({ email, password });
-    if (!valid.success) {
-      res.status(400).json({ message: "user is not vaild"});
-      return;
-    }
-
-    const user = await prisma.user.findUnique({ where: { email } });
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
-      return;
-    }
-
-    const isPasswordValid = await bcrypt.compare(password, user.password!);
-    if (!isPasswordValid) {
-      res.status(401).json({ message: "Invalid password" });
-      return;
-    }
-
-    res.json({
-      user: {
-        id: user.id.toString(),
-        name: user.name,
-        email: user.email,
-        isAdmin: false,
-      },
-    });
-  } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-
-
-
-
-
-// POST /login/google
-login.post("/google", async (req, res) => {
-  try {
-    const { email, name, image, googleId } = req.body;
-
-    if (!email) {
-      res.status(400).json({ message: "Missing email" });
-      return;
-    }
-
-    let user = await prisma.user.findUnique({ where: { email } });
-    if (!user) {
-      user = await prisma.user.create({
-        data: { email, name, image, googleId: googleId?.toString() },
+    const { name, email, image, id } = req.body;
+    const userExist = await prisma.user.findUnique({ where: { email } });
+    if (!userExist?.password) {
+      const result = await prisma.user.upsert({
+        where: { email },
+        update: {
+          name,
+          image,
+          googleId: id?.toString(),
+        },
+        create: {
+          name,
+          email,
+          image,
+          googleId: id?.toString(),
+          role: process.env.ADMIN_EMAIL === email ? 'admin' : 'user'
+        },
       });
+      if (result) {
+        res.status(200).json({ id: result.id });
+      } else {
+        res.status(500).send("error from backend res..... EEEEEE");
+      }
+    } else {
+      res.status(500).send("worng user from backend res..... EEEEEE");
     }
+  } catch (error) {
+    console.log(error);
+  }
+});
 
-    res.json({
-      user: {
-        id: user.id.toString(),
-        name: user.name,
-        email: user.email,
-        isAdmin: false,
+addUser.post("/signupuser", async (req: Request, res: Response) => {
+  const email = req.body.email as string | undefined;
+  const name = req.body.name as string | undefined;
+  const password = req.body.password as string | undefined;
+
+  try {
+    if (!email || !name || !password) {
+      res
+        .status(400)
+        .json({ success: false, message: "please provide all values" });
+      return;
+    }
+    const vaidInput = registerSchema.safeParse({ name, email, password });
+    if (!vaidInput.success) {
+      res
+        .status(400)
+        .json({ success: false, message: vaidInput.error.message });
+      return;
+    }
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
       },
     });
+    if (user) {
+      res.status(400).json({ success: false, message: "user already exists" });
+      return;
+    } else {
+      const hashPassword = await bcrypt.hash(password, 10);
+      if (hashPassword) {
+        await prisma.user.create({
+          data: {
+            email,
+            name,
+            password: hashPassword,
+            role: process.env.ADMIN_EMAIL === email ? 'admin' : 'user'
+          },
+        });
+        res.status(201).json({ success: true, message: "signup successfully" });
+      } else {
+        res.status(500).json({ success: false, message: "signup failed" });
+      }
+    }
   } catch (error) {
-    console.error("Google login error:", error);
-    res.status(500).json({ message: "Internal server error" });
+    console.log(error);
+    res.status(500).json({
+      success: false,
+      message: "internal server error OR see your internet",
+    });
   }
 });
 
 
-// backend/routes/login.ts (or signup.ts)
 
 
 
-login.post("/signup", async (req, res) => {
-  const { name, email, password } = req.body;
-
-  // ✅ Validate input
-  const valid = registerSchema.safeParse({ name, email, password });
-  if (!valid.success) {
-     res.status(400).json({ success: false, message: "Invalid input" });
-     return
-  }
-
+addUser.post("/verify", async (req: Request, res: Response) => {
   try {
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-    if (existingUser) {
-       res.status(409).json({ success: false, message: "User already exists" });
-       return
+    const email = req.body.email;
+    const Data = req.body.customeData;
+    const parseData = verifyuser.safeParse({ email });
+    if (!parseData.success) {
+      res.send("email format not correct");
+      return;
     }
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    await prisma.user.create({
-      data: {
-        name,
+    const user = await prisma.user.findUnique({
+      where: {
         email,
-        password: hashedPassword,
       },
     });
-
-     res.status(201).json({ success: true, message: "Signup successful" });
-  } catch (err) {
-    console.error(err);
-     res.status(500).json({ success: false, message: "Server error" });
+    if (!user) {
+      res.status(404).send("user not found");
+      return;
+    }
+    if (Data == "select only email") {
+      res.status(200).send(user.email);
+    } else if (Data == "select only id and role") {
+      res
+        .status(200)
+        .json({ email: user?.email, id: user?.id, role: user?.role });
+    } else {
+      res.status(200).send(user);
+    }
+  } catch (error) {
+    console.log(error);
   }
 });
 

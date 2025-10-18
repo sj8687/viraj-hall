@@ -66,22 +66,8 @@ export default function CheckAvailability() {
 
   const router = useRouter();
   const { data: authData, status } = useSession();
-  const [token, setToken] = useState<string>();
 
 
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const response = await axios.get("/api/token"); // ✔️ axios call
-        console.log("Token from API:", response.data.token);
-        setToken(response.data.token);
-      } catch (err) {
-        console.error("Error fetching token:", err);
-      }
-    };
-
-    fetchToken();
-  }, []);
 
 
   useEffect(() => {
@@ -139,7 +125,6 @@ export default function CheckAvailability() {
 
   const handleSubmit = useCallback(async () => {
     if (!validateForm()) return;
-    if (!token) return toast.error('Authorization token missing. Try again.');
 
     try {
       setSubmitting(true);
@@ -155,10 +140,11 @@ export default function CheckAvailability() {
           additionalInfo: form.additionalInfo
         },
         {
+          withCredentials: true,
           headers: {
-            Authorization: `Bearer ${token}`,
-            "X-Firebase-Token": firebaseToken,
-          },
+            "X-Firebase-Token": firebaseToken
+          }
+
         }
       );
 
@@ -179,7 +165,7 @@ export default function CheckAvailability() {
     } finally {
       setSubmitting(false);
     }
-  }, [form, date, verifiedPhone, time, plan, token]);
+  }, [form, date, verifiedPhone, time, plan]);
 
   return (
 

@@ -30,7 +30,7 @@ interface BugReport {
   createdAt: string;
 }
 
-export default function AdminBugReports({token}: {token?: string}) {
+export default function AdminBugReports() {
   const { data: authData, status } = useSession();
   const [bugs, setBugs] = useState<BugReport[]>([]);
   const [loading, setLoading] = useState(true);
@@ -38,7 +38,7 @@ export default function AdminBugReports({token}: {token?: string}) {
 
    useEffect(() => {
       if (status === "loading") return;
-      if (!authData || !authData.user?.isAdmin) {
+      if (!authData || !authData.user?.role) {
         router.replace("/");
       }
     }, [authData, status, router]);
@@ -49,9 +49,7 @@ export default function AdminBugReports({token}: {token?: string}) {
     const fetchBugs = async () => {
       try {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_Backend_URL}/bug/bug-report`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-        },
+         withCredentials:true
         });
 
         if (Array.isArray(res.data.bugs)) {
@@ -66,9 +64,9 @@ export default function AdminBugReports({token}: {token?: string}) {
       }
     };
 
-    if (token) {
+   
       fetchBugs();
-    } 
+    
   }, [authData, status]);
 
 

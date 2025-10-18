@@ -143,9 +143,9 @@ payment.post("/verify",userMiddleware, async (req, res) => {
 //         },
 //       });
 
-//       console.log('✅ Payment verified and booking updated');
+//       console.log('Payment verified and booking updated');
 //     } catch (err) {
-//       console.error('❌ Failed to update booking', err);
+//       console.error('Failed to update booking', err);
 //     }
 //   }
 

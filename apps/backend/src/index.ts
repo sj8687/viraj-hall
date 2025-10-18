@@ -9,7 +9,7 @@ import { payment } from "./routes/payment";
 import { show } from "./routes/show";
 import { adminbooking } from "./Admin/allbooking";
 import { contact } from "./routes/contact";
-import { login } from "./routes/login";
+import { addUser } from "./routes/login";
 import { bug } from "./routes/bug";
 import { graph } from "./Admin/graph";
 import { allusers } from "./Admin/allusers";
@@ -36,7 +36,7 @@ app.use("/payment",generalLimiter,payment)
 app.use("/show",generalLimiter,show)
 app.use("/adminbooking",adminbooking)
 app.use("/contact",generalLimiter,contact)
-app.use("/login",generalLimiter,login)
+app.use("/add", addUser);
 app.use("/bug",generalLimiter,bug);
 app.use("/allusers",allusers)
 app.use("/graph",graph)

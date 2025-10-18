@@ -49,7 +49,7 @@ export default function SignupPage() {
     setLoading(true);
     try {
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_Backend_URL}/login/signup`,
+        `${process.env.NEXT_PUBLIC_Backend_URL}/add/signupuser`,
         {
           name,
           email,

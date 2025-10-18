@@ -63,29 +63,16 @@ export default function PaymentPage() {
   const searchParams = useSearchParams();
   const bookingId = searchParams.get("bookingId");
   const { data: authData, status } = useSession();
-  const [token, setToken] = useState<string>();
 
-  // 🔐 Fetch Token
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const res = await axios.get("/api/token");
-        setToken(res.data.token);
-      } catch {
-        toast.error("Failed to get auth token");
-        router.push("/");
-      }
-    };
-    fetchToken();
-  }, []);
+ 
 
-  // ⛔ Redirect unauthenticated users
   useEffect(() => {
     if (status === "loading") return;
     if (!authData) router.replace("/");
   }, [authData, status, router]);
 
-  // 🧠 Razorpay Script
+
+  //  Razorpay Script
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -96,16 +83,16 @@ export default function PaymentPage() {
     };
   }, []);
 
-  // 💳 Payment handler
+  // Payment handler
   const fetchOrder = useCallback(async () => {
-    if (!bookingId || !token) return;
+    if (!bookingId ) return;
 
     try {
       const { data } = await axios.post<RazorpayOrderResponse>(
         `${process.env.NEXT_PUBLIC_Backend_URL}/payment/create`,
         { bookingId },
         {
-          headers: { Authorization: `Bearer ${token}` },
+          withCredentials:true
         }
       );
 
@@ -138,7 +125,7 @@ export default function PaymentPage() {
                 bookingId,
               },
               {
-                headers: { Authorization: `Bearer ${token}` },
+                withCredentials:true
               }
             );
             toast.success("Payment successful!");
@@ -170,12 +157,12 @@ export default function PaymentPage() {
     } finally {
       setLoading(false);
     }
-  }, [bookingId, token]);
+  }, [bookingId]);
 
-  // 🚀 Trigger payment if bookingId + token exist
+  //  Trigger payment if bookingId + token exist
   useEffect(() => {
-    if (bookingId && token) fetchOrder();
-  }, [bookingId, token, fetchOrder]);
+    if (bookingId ) fetchOrder();
+  }, [bookingId, fetchOrder]);
 
   return (
     <div className="min-h-screen flex items-center justify-center">

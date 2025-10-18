@@ -46,7 +46,7 @@ interface Booking {
   };
 }
 
-export default function AdminDashboard({token}:{token?:string}) {
+export default function AdminDashboard() {
   const [bookingsByMonth, setBookingsByMonth] = useState<Record<string, Booking[]>>({});
   const [loading, setLoading] = useState(true);
   const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set());
@@ -61,22 +61,17 @@ export default function AdminDashboard({token}:{token?:string}) {
 
   useEffect(() => {
     if (status === "loading") return;
-    if (!authData || !authData.user?.isAdmin) {
+    if (!authData || !authData.user?.role) {
       router.replace("/");
     }
   }, [authData, status, router]);
 
   const fetchBookings = () => {
-    if (!token) {
-      toast.error("Authentication token is missing. Please log in again.");
-      return;
-    }
+  
     setLoading(true);
     axios
       .get(`${process.env.NEXT_PUBLIC_Backend_URL}/adminbooking/admin/bookings`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
+       withCredentials:true
       })
       .then((res) => {
         setBookingsByMonth(res.data);
@@ -93,9 +88,9 @@ export default function AdminDashboard({token}:{token?:string}) {
     try {
       await axios.delete(
         `${process.env.NEXT_PUBLIC_Backend_URL}/adminbooking/admin/delete/${id}`,
-        { headers: {
-            Authorization: `Bearer ${token}`,
-        }, }
+        { 
+          withCredentials:true,
+         }
       );
       toast.success("Booking deleted successfully");
       fetchBookings();
@@ -105,12 +100,10 @@ export default function AdminDashboard({token}:{token?:string}) {
   };
 
   useEffect(() => {
-    if (token) {
+    
       fetchBookings();
-    }else{
-      router.push('/');
-    }
-  }, [token]);
+  
+  }, []);
 
   const toggleRow = (id: string) => {
     setExpandedRows((prev) => {

@@ -32,22 +32,7 @@ export default function MyBookings() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { data: authData, status } = useSession();
-  const [token, setToken] = useState<string>();
 
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const response = await axios.get("/api/token"); // ✔️ axios call
-        console.log("Token from API:", response.data.token);
-        setToken(response.data.token);
-      } catch (err) {
-        console.error("Error fetching token:", err);
-      }
-    };
-
-    fetchToken();
-  }, []);
 
 
   useEffect(() => {
@@ -60,19 +45,15 @@ export default function MyBookings() {
 
 
   useEffect(() => {
-    if (!token) return;
 
     const fetchBookings = async () => {
       setLoading(true);
       try {
-        console.log("Fetching with token:", token);
 
         const { data } = await axios.get(
           `${process.env.NEXT_PUBLIC_Backend_URL}/show/show`,
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
+           withCredentials:true
           }
         );
         setBookings(data);
@@ -90,8 +71,8 @@ export default function MyBookings() {
       }
     };
 
-    fetchBookings(); // ✅ only when token is ready
-  }, [token]);
+    fetchBookings();
+  }, []);
 
   return (
     <div className="min-h-screen max-w-[1250px] mx-auto px-4 py-8 mt-[80px] flex flex-col">
@@ -153,7 +134,6 @@ export default function MyBookings() {
                   </div>
                 </div>
 
-                {/* Date & Time column (4/12) */}
                 <div className="col-span-4 flex flex-col justify-center gap-2 text-sm text-gray-700 mt-4 md:mt-0 text-center md:text-left">
                   <p>
                     <strong>Check-In:</strong> {formatDate(booking.date)}
@@ -166,7 +146,6 @@ export default function MyBookings() {
                   </p>
                 </div>
 
-                {/* Payment column (3/12) */}
                 <div className="col-span-3 flex flex-col justify-center items-center md:items-start gap-2 mt-4 md:mt-0 text-sm px-4 md:px-0 text-center md:text-left">
                   <span
                     className={`font-medium inline-flex items-center gap-2 ${isPaid ? "text-green-600" : "text-red-500"

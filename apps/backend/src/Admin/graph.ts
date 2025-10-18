@@ -1,6 +1,6 @@
 import { prisma } from "@repo/db";
 import { Router } from "express";
-import { middleware } from "../middleware/token";
+import { middleware } from "../middleware/adminmiddle";
 export const graph = Router();
 
 graph.get("/admin/user-growth",middleware, async (req, res) => {

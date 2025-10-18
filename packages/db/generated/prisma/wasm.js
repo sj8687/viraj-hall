@@ -182,11 +182,6 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-exports.Role = exports.$Enums.Role = {
-  USER: 'USER',
-  ADMIN: 'ADMIN'
-};
-
 exports.BookingPlan = exports.$Enums.BookingPlan = {
   BASIC: 'BASIC',
   PREMIUM: 'PREMIUM'

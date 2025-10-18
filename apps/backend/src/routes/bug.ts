@@ -3,7 +3,7 @@ import { prisma } from '@repo/db';
 import { bugReportSchema } from '@repo/zod';
 import  { cloudinaryUploader } from "./../utils/cloud";
 import { userMiddleware } from '../middleware/clientmiddle';
-import { middleware } from '../middleware/token';
+import { middleware } from '../middleware/adminmiddle';
 
 export const bug = Router();
 

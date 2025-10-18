@@ -1,7 +1,7 @@
 // routes/admin.js
 import express, { Router } from "express";
 import { prisma } from "@repo/db";
-import { middleware } from "../middleware/token";
+import { middleware } from "../middleware/adminmiddle";
 import cache from "../utils/casche";
 
 export const adminbooking = Router();

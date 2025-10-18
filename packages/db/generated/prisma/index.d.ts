@@ -1251,7 +1251,7 @@ export namespace Prisma {
     password: string | null
     image: string | null
     googleId: string | null
-    role: $Enums.Role | null
+    role: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1262,7 +1262,7 @@ export namespace Prisma {
     password: string | null
     image: string | null
     googleId: string | null
-    role: $Enums.Role | null
+    role: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1414,7 +1414,7 @@ export namespace Prisma {
     password: string | null
     image: string | null
     googleId: string | null
-    role: $Enums.Role
+    role: string
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1506,7 +1506,7 @@ export namespace Prisma {
       password: string | null
       image: string | null
       googleId: string | null
-      role: $Enums.Role
+      role: string
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1939,7 +1939,7 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly image: FieldRef<"User", 'String'>
     readonly googleId: FieldRef<"User", 'String'>
-    readonly role: FieldRef<"User", 'Role'>
+    readonly role: FieldRef<"User", 'String'>
   }
     
 
@@ -5892,20 +5892,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Role'
-   */
-  export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
-    
-
-
-  /**
-   * Reference to a field of type 'Role[]'
-   */
-  export type ListEnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role[]'>
-    
-
-
-  /**
    * Reference to a field of type 'BookingPlan'
    */
   export type EnumBookingPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'BookingPlan'>
@@ -5961,7 +5947,7 @@ export namespace Prisma {
     password?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
     googleId?: StringNullableFilter<"User"> | string | null
-    role?: EnumRoleFilter<"User"> | $Enums.Role
+    role?: StringFilter<"User"> | string
     bookings?: BookingListRelationFilter
     bugReport?: BugReportListRelationFilter
   }
@@ -5990,7 +5976,7 @@ export namespace Prisma {
     password?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
     googleId?: StringNullableFilter<"User"> | string | null
-    role?: EnumRoleFilter<"User"> | $Enums.Role
+    role?: StringFilter<"User"> | string
     bookings?: BookingListRelationFilter
     bugReport?: BugReportListRelationFilter
   }, "id" | "email">
@@ -6022,7 +6008,7 @@ export namespace Prisma {
     password?: StringNullableWithAggregatesFilter<"User"> | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     googleId?: StringNullableWithAggregatesFilter<"User"> | string | null
-    role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
+    role?: StringWithAggregatesFilter<"User"> | string
   }
 
   export type otpStoreWhereInput = {
@@ -6263,7 +6249,7 @@ export namespace Prisma {
     password?: string | null
     image?: string | null
     googleId?: string | null
-    role?: $Enums.Role
+    role?: string
     bookings?: BookingCreateNestedManyWithoutUserInput
     bugReport?: BugReportCreateNestedManyWithoutUserInput
   }
@@ -6276,7 +6262,7 @@ export namespace Prisma {
     password?: string | null
     image?: string | null
     googleId?: string | null
-    role?: $Enums.Role
+    role?: string
     bookings?: BookingUncheckedCreateNestedManyWithoutUserInput
     bugReport?: BugReportUncheckedCreateNestedManyWithoutUserInput
   }
@@ -6288,7 +6274,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    role?: StringFieldUpdateOperationsInput | string
     bookings?: BookingUpdateManyWithoutUserNestedInput
     bugReport?: BugReportUpdateManyWithoutUserNestedInput
   }
@@ -6301,7 +6287,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    role?: StringFieldUpdateOperationsInput | string
     bookings?: BookingUncheckedUpdateManyWithoutUserNestedInput
     bugReport?: BugReportUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -6314,7 +6300,7 @@ export namespace Prisma {
     password?: string | null
     image?: string | null
     googleId?: string | null
-    role?: $Enums.Role
+    role?: string
   }
 
   export type UserUpdateManyMutationInput = {
@@ -6324,7 +6310,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -6335,7 +6321,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    role?: StringFieldUpdateOperationsInput | string
   }
 
   export type otpStoreCreateInput = {
@@ -6647,13 +6633,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type EnumRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
   export type BookingListRelationFilter = {
     every?: BookingWhereInput
     some?: BookingWhereInput
@@ -6784,16 +6763,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumRoleFilter<$PrismaModel>
-    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type otpStoreCountOrderByAggregateInput = {
@@ -7031,10 +7000,6 @@ export namespace Prisma {
     set?: string
   }
 
-  export type EnumRoleFieldUpdateOperationsInput = {
-    set?: $Enums.Role
-  }
-
   export type BookingUpdateManyWithoutUserNestedInput = {
     create?: XOR<BookingCreateWithoutUserInput, BookingUncheckedCreateWithoutUserInput> | BookingCreateWithoutUserInput[] | BookingUncheckedCreateWithoutUserInput[]
     connectOrCreate?: BookingCreateOrConnectWithoutUserInput | BookingCreateOrConnectWithoutUserInput[]
@@ -7193,13 +7158,6 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedEnumRoleFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleFilter<$PrismaModel> | $Enums.Role
-  }
-
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -7284,16 +7242,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
-    in?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    notIn?: $Enums.Role[] | ListEnumRoleFieldRefInput<$PrismaModel>
-    not?: NestedEnumRoleWithAggregatesFilter<$PrismaModel> | $Enums.Role
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumRoleFilter<$PrismaModel>
-    _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
   export type NestedEnumBookingPlanFilter<$PrismaModel = never> = {
@@ -7505,7 +7453,7 @@ export namespace Prisma {
     password?: string | null
     image?: string | null
     googleId?: string | null
-    role?: $Enums.Role
+    role?: string
     bugReport?: BugReportCreateNestedManyWithoutUserInput
   }
 
@@ -7517,7 +7465,7 @@ export namespace Prisma {
     password?: string | null
     image?: string | null
     googleId?: string | null
-    role?: $Enums.Role
+    role?: string
     bugReport?: BugReportUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -7544,7 +7492,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    role?: StringFieldUpdateOperationsInput | string
     bugReport?: BugReportUpdateManyWithoutUserNestedInput
   }
 
@@ -7556,7 +7504,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    role?: StringFieldUpdateOperationsInput | string
     bugReport?: BugReportUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -7567,7 +7515,7 @@ export namespace Prisma {
     password?: string | null
     image?: string | null
     googleId?: string | null
-    role?: $Enums.Role
+    role?: string
     bookings?: BookingCreateNestedManyWithoutUserInput
   }
 
@@ -7579,7 +7527,7 @@ export namespace Prisma {
     password?: string | null
     image?: string | null
     googleId?: string | null
-    role?: $Enums.Role
+    role?: string
     bookings?: BookingUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -7606,7 +7554,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    role?: StringFieldUpdateOperationsInput | string
     bookings?: BookingUpdateManyWithoutUserNestedInput
   }
 
@@ -7618,7 +7566,7 @@ export namespace Prisma {
     password?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     googleId?: NullableStringFieldUpdateOperationsInput | string | null
-    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    role?: StringFieldUpdateOperationsInput | string
     bookings?: BookingUncheckedUpdateManyWithoutUserNestedInput
   }
 

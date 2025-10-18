@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 
-export default function DashboardSummary({token} :{token?:string}) {
+export default function DashboardSummary() {
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalBookings: 0,
@@ -20,7 +20,7 @@ export default function DashboardSummary({token} :{token?:string}) {
    
      useEffect(() => {
       if (status === "loading") return;
-      if (!authData || !authData.user?.isAdmin) {
+      if (!authData || !authData.user?.role) {
         router.replace("/");
       }
     }, [authData, status, router]);
@@ -28,19 +28,14 @@ export default function DashboardSummary({token} :{token?:string}) {
  
 
   useEffect(() => {
-    if (!token) {
-      console.error("Authentication token is missing. Please log in again.");
-      return;
-    }
+    
     axios
       .get(`${process.env.NEXT_PUBLIC_Backend_URL}/allusers/allusers`, {
-         headers: {
-            Authorization: `Bearer ${token}`,
-        },
+         withCredentials:true
       })
       .then((res) => setStats(res.data))
       .catch(() => console.error("Failed to fetch stats"));
-  }, [token]);
+  }, []);
 
 
   return (
@@ -91,7 +86,7 @@ export default function DashboardSummary({token} :{token?:string}) {
 
     <div className="mt-8">
       <h2 className="text-xl font-semibold mb-4">User Growth Over Time</h2>
-      <UserGrowthChart token={token} />
+      <UserGrowthChart />
     </div>
 
     

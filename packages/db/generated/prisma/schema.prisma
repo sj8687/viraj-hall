@@ -22,7 +22,7 @@ model User {
   password  String?
   image     String?
   googleId  String?
-  role      Role     @default(USER)
+  role      String   @default("user")
 
   bookings  Booking[]
   bugReport BugReport[]

@@ -13,7 +13,6 @@ export default function Theme() {
     const {theme , setTheme} = useTheme();
      const [mounted, setMounted] = useState(false);
 
-  // Make sure to wait until mounted on client
   useEffect(() => {
     setMounted(true);
   }, []);

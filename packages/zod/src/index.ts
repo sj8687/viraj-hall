@@ -6,6 +6,10 @@ export const registerSchema = z.object({
     password:z.string().min(6,{message:"password is min 6 char"})
 })
 
+export const verifyuser = z.object({
+  email: z.string().email({ message: "not valid email format" }),
+});
+
 export const loginSchema = z.object({
     email:z.string().email({message:"not valid email format"}),
     password:z.string().min(6,{message:"min 6 char is nedded in password"})
