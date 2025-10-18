@@ -108,8 +108,7 @@ export default function MyBookings() {
                 key={booking.id}
                 className="grid grid-cols-1 md:grid-cols-12 md:gap-4 border-b pb-6"
               >
-                {/* Venue column (5/12) */}
-                {/* Venue column (5/12) */}
+               
                 <div className="col-span-5 flex flex-col md:flex-row md:items-center gap-4">
                   <Image
                     src="/hall.jpg"
