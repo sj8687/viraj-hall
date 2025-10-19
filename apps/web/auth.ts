@@ -149,15 +149,13 @@ const config: NextAuthConfig = {
           : "__Secure-authjs.session-token",
       options: {
         httpOnly: true,
-           sameSite: "none",
-        // sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+        sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
         path: "/",
-        secure: true,
-        // secure: process.env.NODE_ENV === "development" ? false : true,
-        // domain:
-        //   process.env.NODE_ENV === "development"
-        //     ? undefined
-        //     : undefined,
+        secure: process.env.NODE_ENV === "development" ? false : true,
+        domain:
+          process.env.NODE_ENV === "development"
+            ? undefined
+            : "viraj-hall-backend.onrender.com",
       },
     },
   },
