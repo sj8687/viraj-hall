@@ -33,7 +33,7 @@ interface BookingRequest {
   plan: PlanType;
   id: string;
   functionType?: string;
-  additionalInfo?: string; // ✅ added
+  additionalInfo?: string;
 }
 
 interface BookingFormInput {
@@ -41,7 +41,7 @@ interface BookingFormInput {
   contact: string;
   guests: string;
   functionType?: string;
-  additionalInfo?: string; // ✅ added
+  additionalInfo?: string;
 }
 
 // Utils

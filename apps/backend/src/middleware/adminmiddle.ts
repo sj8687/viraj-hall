@@ -9,7 +9,12 @@ export const middleware = async (
   next: NextFunction
 ): Promise<void> => {
   try {
+     console.log(req);
+
  const token = req.cookies[process.env.NODE_ENV === 'production' ? `${process.env.PROD_SALT}` : `${process.env.DEV_SALT}`];
+ console.log(token);
+ 
+ 
     const encryptionKey = await getDerivedEncryptionKey();
     const { plaintext } = await jose.compactDecrypt(token, encryptionKey);
     const decodedPayload = JSON.parse(new TextDecoder().decode(plaintext));

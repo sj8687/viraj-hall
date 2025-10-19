@@ -13,9 +13,13 @@ declare module "express" {
 
 export const userMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
+     console.log(req);
+
     const token = req.cookies[
       process.env.NODE_ENV === "production" ? `${process.env.PROD_SALT}` : `${process.env.DEV_SALT}`
     ];
+
+     console.log(token);
 
     if (!token) {
       res.status(401).json({ message: "unauthorized user" });
