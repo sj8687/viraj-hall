@@ -152,11 +152,7 @@ const config: NextAuthConfig = {
         sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
         path: "/",
         secure: process.env.NODE_ENV === "development" ? false : true,
-        domain: undefined
-          // process.env.NODE_ENV === "development"
-          //   ? undefined
-          //   : "viraj-hall-backend.onrender.com",
-      },
+            },
     },
   },
 };
