@@ -13,7 +13,7 @@ declare module "express" {
 
 export const userMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-     console.log(req);
+     console.log(req.cookies);
 
     const token = req.cookies[
       process.env.NODE_ENV === "production" ? `${process.env.PROD_SALT}` : `${process.env.DEV_SALT}`

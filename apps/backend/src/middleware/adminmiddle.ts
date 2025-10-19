@@ -9,7 +9,7 @@ export const middleware = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-     console.log(req);
+     console.log(req.cookies);
 
  const token = req.cookies[process.env.NODE_ENV === 'production' ? `${process.env.PROD_SALT}` : `${process.env.DEV_SALT}`];
  console.log(token);
