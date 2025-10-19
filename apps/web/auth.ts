@@ -140,16 +140,22 @@ const config: NextAuthConfig = {
 
   // custome cookie for my error in be req.cookie is null cheking this work orr noy 
 
-  useSecureCookies: true,
+  useSecureCookies: process.env.NODE_ENV === "development" ? false : true,
   cookies: {
     sessionToken: {
-      name: "__Secure-authjs.session-token",
+      name:
+        process.env.NODE_ENV === "development"
+          ? "authjs.session-token"
+          : "__Secure-authjs.session-token",
       options: {
         httpOnly: true,
-        sameSite:  "none",
+        sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
         path: "/",
-        secure:  true,
-       
+        secure: process.env.NODE_ENV === "development" ? false : true,
+        domain:
+          process.env.NODE_ENV === "development"
+            ? undefined
+            : "render.com",
       },
     },
   },
