@@ -152,10 +152,10 @@ const config: NextAuthConfig = {
         sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
         path: "/",
         secure: process.env.NODE_ENV === "development" ? false : true,
-        domain:
-          process.env.NODE_ENV === "development"
-            ? undefined
-            : "render.com",
+        // domain:
+        //   process.env.NODE_ENV === "development"
+        //     ? undefined
+        //     : "render.com",
       },
     },
   },
