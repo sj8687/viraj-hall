@@ -43,7 +43,7 @@ export interface BookingState {
   checking: boolean;
   submitting: boolean;
 
-\  setDate: (v: string) => void;
+  setDate: (v: string) => void;
   setTime: (v: string) => void;
   setPlan: (v: PlanType) => void;
   setForm: (v: Partial<BookingFormInput>) => void;
