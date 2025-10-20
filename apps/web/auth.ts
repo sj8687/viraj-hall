@@ -149,7 +149,7 @@ const config: NextAuthConfig = {
           : "__Secure-authjs.session-token",
       options: {
         httpOnly: true,
-        sameSite: process.env.NODE_ENV === "development" ? "lax" : "none",
+        sameSite: process.env.NODE_ENV === "development" ? "lax" : "lax",
         path: "/",
         secure: process.env.NODE_ENV === "development" ? false : true,
         domain:
