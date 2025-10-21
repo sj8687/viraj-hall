@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Spinner } from './Spinner';
 import { Disclaimer } from '@/components/Disclaminer';
 import dynamic from 'next/dynamic';
-import { useBookingStore } from '@/app/store/zustand';
+import { useBookingStore } from '@/app/store/bookingstore';
 
 const PhoneOtp = dynamic(() => import('./Phone'), { ssr: false, loading: () => <Spinner /> });
 
