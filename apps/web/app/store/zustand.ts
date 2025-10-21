@@ -92,6 +92,7 @@ export const Zusstore = create<BookingState>((set) => ({
                         );
                         toast.success("Payment successful!");
                         onSuccess();
+                        set({ loading: false });
                     } catch (err: any) {
                         if (err.response?.status === 429) {
                             toast.error('Too many requests. Please wait.');
