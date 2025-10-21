@@ -5,14 +5,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Spinner } from "./Spinner";
 import "react-toastify/dist/ReactToastify.css";
-import { showBookingstore } from "@/app/store/zustand";
+import { Zusstore } from "@/app/store/zustand";
 
 export default function PaymentPage() {
   const { data: authData, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
   const bookingId = searchParams.get("bookingId");
-  const { loading, fetchorder } = showBookingstore();
+  const { loading, fetchorder } = Zusstore();
 
   useEffect(() => {
     if (status === "loading") return;

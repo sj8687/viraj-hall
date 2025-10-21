@@ -21,7 +21,7 @@ export interface BookingState {
 }
 
 
-export const showBookingstore = create<BookingState>((set) => ({
+export const Zusstore = create<BookingState>((set) => ({
     bookings: [],
     loading: false,
 
