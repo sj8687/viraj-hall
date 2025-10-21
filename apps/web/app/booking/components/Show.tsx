@@ -1,23 +1,13 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { Spinner } from "./Spinner";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-// import { getTokenFromServer } from "@/app/actions/gettoken/gettoken";
+import { showBookingstore } from "@/app/store/showbookingstore";
 
-interface Booking {
-  id: string;
-  date: string;
-  customer: string;
-  guests: number;
-  plan: "BASIC" | "PREMIUM";
-  status: "PENDING" | "CONFIRMED";
-  functionType?: string;
-}
 
 const formatDate = (dateString: string) =>
   new Date(dateString).toLocaleDateString("en-GB", {
@@ -28,11 +18,10 @@ const formatDate = (dateString: string) =>
   });
 
 export default function MyBookings() {
-  const [bookings, setBookings] = useState<Booking[]>([]);
-  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { data: authData, status } = useSession();
 
+  const {bookings,loading,fetchBookings} = showBookingstore()
 
 
   useEffect(() => {
@@ -45,34 +34,8 @@ export default function MyBookings() {
 
 
   useEffect(() => {
-
-    const fetchBookings = async () => {
-      setLoading(true);
-      try {
-
-        const { data } = await axios.get(
-          `${process.env.NEXT_PUBLIC_Backend_URL}/show/show`,
-          {
-           withCredentials:true
-          }
-        );
-        setBookings(data);
-      } catch (err: any) {
-        if (err.response?.status === 429) {
-          toast.error('Too many requests. Please wait.');
-        } else {
-          toast.error("Failed to load bookings");
-        }
-
-
-        toast.error("Failed to load bookings");
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchBookings();
-  }, []);
+  }, [fetchBookings]);
 
   return (
     <div className="min-h-screen max-w-[1250px] mx-auto px-4 py-8 mt-[80px] flex flex-col">
@@ -81,7 +44,6 @@ export default function MyBookings() {
         Easily manage your past, current, and upcoming hall bookings in one place.
       </p>
 
-      {/* Desktop header row */}
       <div className="hidden md:grid grid-cols-12 font-semibold text-gray-700 border-b pb-2 mb-4 text-sm">
         <span className="col-span-5">Venue</span>
         <span className="col-span-4">Date & Timings</span>
@@ -113,8 +75,8 @@ export default function MyBookings() {
                   <Image
                     src="/hall.jpg"
                     alt="Hall"
-                    width={112}   // same as md:w-28
-                    height={96}   // same as md:h-24
+                    width={112}   
+                    height={96}  
                     className="w-full h-40 md:w-28 md:h-24 object-cover rounded"
                   />
                   <div className="text-center md:text-left">

@@ -4,7 +4,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { redirect } from 'next/navigation';
 import { devtools } from 'zustand/middleware';
-import type { Session } from 'next-auth';
 import { BookingRequest, BookingState, CheckQuery } from './types';
 
 
@@ -79,6 +78,7 @@ checkAvailability: async () => {
           res.data.available ? 'Slot is available ✅' : 'Slot already booked ❌'
         );
         toast.info('Before payment, please read the disclaimer.');
+
       } catch (err: any) {
         if (err.response?.status === 429) {
           toast.error('Too many requests. Please wait.');

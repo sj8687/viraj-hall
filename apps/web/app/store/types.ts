@@ -1,6 +1,6 @@
 import type { Session } from 'next-auth';
 
-
+// booking & checking types
 export type PlanType = 'BASIC' | 'PREMIUM';
 
 export interface CheckQuery {
@@ -53,4 +53,26 @@ export interface BookingState {
   handleSubmit: (auth: Session | null) => Promise<void>;
 
   resetForm: () => void;
+}
+
+
+
+
+
+
+// show booking data types
+export interface Booking {
+    id: string;
+    date: string;
+    customer: string;
+    guests: number;
+    plan: 'BASIC' | 'PREMIUM';
+    status: 'pending' | 'CONFIRMED';
+    functionType: string;
+}
+
+export interface BookingState {
+    bookings: Booking[];
+    loading: boolean;
+    fetchBookings: () => Promise<void>
 }
