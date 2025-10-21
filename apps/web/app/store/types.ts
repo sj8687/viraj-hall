@@ -76,3 +76,50 @@ export interface BookingState {
     loading: boolean;
     fetchBookings: () => Promise<void>
 }
+
+
+
+
+
+
+// payment route types
+export interface RazorpayPaymentResponse {
+  razorpay_order_id: string;
+  razorpay_payment_id: string;
+  razorpay_signature: string;
+}
+
+export interface RazorpayOrderResponse {
+  orderId: string;
+  amount: number;
+  currency: string;
+  plan: string;
+  id: string; // booking ID
+  customer: string;
+  email: string;
+  contact: string;
+}
+
+export interface RazorpayOptions {
+  key: string;
+  amount: number;
+  currency: string;
+  name: string;
+  description: string;
+  order_id: string;
+  handler: (response: any) => void;
+  prefill: {
+    name: string;
+    email: string;
+    contact: string;
+  };
+  notes: {
+    bookingId: string;
+  };
+  theme: {
+    color: string;
+  };
+  modal?: {
+    ondismiss: () => void;
+  };
+}

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Spinner } from "./Spinner";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { showBookingstore } from "@/app/store/showbookingstore";
+import { showBookingstore } from "@/app/store/zustand";
 
 
 const formatDate = (dateString: string) =>
