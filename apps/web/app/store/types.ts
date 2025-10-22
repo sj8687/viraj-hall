@@ -123,3 +123,32 @@ export interface RazorpayOptions {
     ondismiss: () => void;
   };
 }
+
+
+
+
+
+
+// types of fetch bugs(admin)
+export interface BugReport {
+  id: string;
+  title: string;
+  description: string;
+  screenshot: string;
+  userEmail: string;
+  userName: string;
+  createdAt: string;
+}
+
+
+
+
+
+//types of userdata
+export interface Stats {
+    totalUsers: number;
+    totalBookings: number;
+    totalRevenue: number;
+    newUsers: number;
+    totalBugs: number;
+}
