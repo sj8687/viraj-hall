@@ -2,9 +2,10 @@ import express, { Router } from 'express';
 import { prisma } from "@repo/db"
 import { razorpay } from '../utils/razerpay';
 import crypto from "crypto"
-import { transporter } from '../utils/otpConfig';
 import { userMiddleware } from '../middleware/clientmiddle';
 import cache from "../utils/casche";
+import { sendBookingEmail } from "../utils/mailer";
+
 
 export const payment = Router();
 
@@ -74,30 +75,10 @@ payment.post("/verify",userMiddleware, async (req, res) => {
 
 
 
-        // const emailSendData = await transporter.sendMail({
-        // from: process.env.SMTP_USER,
-        // to: updatebooking.email!, 
-        // subject: '🎉 Booking Confirmed - Viraj Multipurpose Hall',
-        // html: `
-        //   <h2>Dear ${updatebooking.customer},</h2>
-        //   <p>Your booking has been <strong>successfully confirmed</strong>!</p>
-        //   <ul>
-        //     <li><strong>Date:</strong> ${updatebooking.date}</li>
-        //     <li><strong>Time:</strong> ${updatebooking.timeSlot}</li>
-        //     <li><strong>Plan:</strong> ${updatebooking.plan}</li>
-        //     <li><strong>Guests:</strong> ${updatebooking.guests}</li>
-        //     <li><strong>Function:</strong> ${updatebooking.functionType}</li>
-        //   </ul>
-        //   <p>Thank you for choosing <strong>Viraj Multipurpose Hall</strong>. We look forward to hosting your special occasion!</p>
-        //   <br />
-        //   <p style="font-size: 0.9rem; color: gray;">This is an automated email. Do not reply.</p>
-        // `,
-        // });
-
-      // await transporter.sendMail(mailOptions);
+           await sendBookingEmail(updatebooking);
 
 
-      //  cache.del(`bookings-${updatebooking.email}`);
+       cache.del(`bookings-${updatebooking.email}`);
        cache.del("adminBookings");
       res.json({ success: true });
     } catch (err) {
