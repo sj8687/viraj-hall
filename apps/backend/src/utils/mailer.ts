@@ -28,3 +28,9 @@ export const sendBookingEmail = async (booking: any) => {
     console.error("❌ Failed to send email:", error);
   }
 };
+
+
+
+
+
+
