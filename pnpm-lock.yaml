@@ -145,6 +145,12 @@ importers:
       '@radix-ui/react-slot':
         specifier: ^1.2.2
         version: 1.2.2(@types/react@19.1.0)(react@19.1.0)
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../../packages/db
+      '@repo/ui':
+        specifier: workspace:*
+        version: link:../../packages/ui
       '@repo/zod':
         specifier: workspace:*
         version: link:../../packages/zod
