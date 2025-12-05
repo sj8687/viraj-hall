@@ -13,8 +13,6 @@
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.8",
     "@radix-ui/react-slot": "^1.2.2",
-    "@repo/db": "workspace:*",
-    "@repo/ui": "workspace:*",
     "@repo/zod": "workspace:*",
     "@types/js-cookie": "^3.0.6",
     "axios": "^1.9.0",
