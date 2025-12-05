@@ -11,11 +11,12 @@
     "lint": "turbo run lint",
     "check-types": "turbo run check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-
-  "build-all": "pnpm -w tsc",
-  "build-db": "cd packages/db && tsc",
-  "build-backend": "cd apps/backend && tsc"
-
+    "start:web": "cd apps/web && pnpm start",
+    "start:backend": "cd apps/backend && pnpm run start",
+    "db:generate": "cd packages/db && npx prisma generate && cd ../..",
+    "build-all": "pnpm -w tsc",
+    "build-db": "cd packages/db && tsc",
+    "build-backend": "cd apps/backend && tsc"
   },
   "devDependencies": {
     "prettier": "^3.5.3",
