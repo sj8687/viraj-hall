@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  backend:
+    container_name: backend
+    build:
+      context: .
+      dockerfile: ./apps/docker/Dockerfile.be
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./apps/backend/.env
+    networks:
+      - mynetwork
+
+  frontend:
+    container_name: frontend
+    build:
+      context: .
+      dockerfile: ./apps/docker/Dockerfile.web
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./apps/web/.env.local
+    depends_on:
+      - backend
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
