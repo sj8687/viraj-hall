@@ -4,6 +4,16 @@ import bcrypt from "bcryptjs";
 import NextAuth, { CredentialsSignin, type NextAuthConfig } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
+import { getUrl } from "./lib/dokcer-url-config";
+
+
+const baseUrl = getUrl()
+
+console.log("yesssssssssss", baseUrl);
+
+console.log("ohh secret", process.env.AUTH_SECRET);
+
+console.log("fuck me", process.env.AUTH_ENV);
 
 
 declare module "next-auth" {
@@ -49,7 +59,7 @@ const config: NextAuthConfig = {
             cause: "both required email and password",
           });
 
-        
+
         const validInput = loginSchema.safeParse({ email, password });
         if (!validInput.success) {
           throw new CredentialsSignin(validInput.error.errors[0]?.message, {
@@ -58,7 +68,7 @@ const config: NextAuthConfig = {
         }
 
         const user = await axios.post(
-          `${process.env.NEXT_PUBLIC_Backend_URL}/add/verify`,
+          `${baseUrl}/add/verify`,
           { email },
         );
 
@@ -100,7 +110,7 @@ const config: NextAuthConfig = {
           throw new Error("Invalid email");
         }
         const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_Backend_URL}/add/user`,
+          `${baseUrl}/add/user`,
           { email, id, name, image },
         );
         if (res.status === 200) {
@@ -127,7 +137,7 @@ const config: NextAuthConfig = {
 
     async jwt({ token }) {
       const existing_user = await axios.post(
-        `${process.env.NEXT_PUBLIC_Backend_URL}/add/verify`,
+        `${baseUrl}/add/verify`,
         { email: token.email, customeData: "select only id and role" },
       );
       if (!existing_user) return token;
@@ -153,10 +163,12 @@ const config: NextAuthConfig = {
         path: "/",
         secure: process.env.AUTH_ENV === "development" ? false : true,
         domain:
-          process.env.AUTH_ENV === "development"
-            ? undefined
-            : ".virajmultipurposehall.site",
-        
+          process.env.DOCKER == "true"
+            ? "localhost"
+            : process.env.AUTH_ENV === "production"
+              ? ".virajmultipurposehall.site"
+              : undefined,
+
       },
     },
   },

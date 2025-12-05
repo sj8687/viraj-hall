@@ -11,9 +11,9 @@ export const middleware = async (
   try {
      console.log(req.cookies);
 
-//  const token = req.cookies[process.env.NODE_ENV === 'production' ? `${process.env.PROD_SALT}` : `${process.env.DEV_SALT}`];
+ const token = req.cookies[process.env.NODE_ENV === 'production' ? `${process.env.PROD_SALT}` : `${process.env.DEV_SALT}`];
 
-    const token = req.cookies[process.env.PROD_SALT as string];
+    // const token = req.cookies[process.env.PROD_SALT as string];
 
  console.log(token);
  
