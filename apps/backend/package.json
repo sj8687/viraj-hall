@@ -5,8 +5,9 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/index.js",
-    "dev": "pnpm run build && nodemon ./dist/index.js"
-    },
+    "dev": "pnpm run build && nodemon ./dist/index.js",
+    "prepare": "pnpm --filter @repo/db... build"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
