@@ -13,7 +13,7 @@ console.log("yesssssssssss", baseUrl);
 
 console.log("ohh secret", process.env.AUTH_SECRET);
 
-console.log("fuck me", process.env.AUTH_ENV);
+console.log("fuck me", process.env.NODE_ENV);
 
 
 declare module "next-auth" {
@@ -154,18 +154,18 @@ const config: NextAuthConfig = {
   cookies: {
     sessionToken: {
       name:
-        process.env.AUTH_ENV === "development"
+        process.env.NODE_ENV === "development"
           ? "authjs.session-token"
           : "__Secure-authjs.session-token",
       options: {
         httpOnly: true,
-        sameSite: process.env.AUTH_ENV === "development" ? "lax" : "lax",
+        sameSite: process.env.NODE_ENV === "development" ? "lax" : "lax",
         path: "/",
-        secure: process.env.AUTH_ENV === "development" ? false : true,
+        secure: process.env.NODE_ENV === "development" ? false : true,
         domain:
           process.env.DOCKER == "true"
             ? "localhost"
-            : process.env.AUTH_ENV === "production"
+            : process.env.NODE_ENV === "production"
               ? ".virajmultipurposehall.site"
               : undefined,
 
