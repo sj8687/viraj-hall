@@ -13,5 +13,5 @@
       "@repo/db": ["../../packages/db/dist"]
     }
   },
-  "include": ["src"]
+  "include":["src"]
 }
