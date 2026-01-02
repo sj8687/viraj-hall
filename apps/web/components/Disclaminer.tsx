@@ -34,7 +34,7 @@ export const Disclaimer = () => {
               <br />
               📞 <strong>+91 98765 43210</strong>
               <br />
-              📧 <strong>support@virajhall.com</strong>
+              📧 <strong>support@virajhall</strong>
             </li>
             <li>
               By making a payment, you agree to all our terms and conditions stated above.
