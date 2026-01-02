@@ -28,7 +28,7 @@ const Services = () => {
                         </p>
                     </div>
 
-                    {/* Services Section */}
+                    {/* Services Sectin */}
                     <div className="space-y-16">
                         <div className="relative">
                             <div className="absolute w-[95%] h-[60%] top-16 left-14 bg-orange-200 opacity-50 rounded-full blur-[100px] z-[-1]"></div>
