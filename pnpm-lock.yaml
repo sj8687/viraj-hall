@@ -188,11 +188,11 @@ importers:
         specifier: ^12.9.7
         version: 12.9.7(react-dom@19.1.0)(react@19.1.0)
       next:
-        specifier: ^15.3.2
-        version: 15.5.7(react-dom@19.1.0)(react@19.1.0)
+        specifier: 15.5.9
+        version: 15.5.9(react-dom@19.1.0)(react@19.1.0)
       next-auth:
         specifier: 5.0.0-beta.28
-        version: 5.0.0-beta.28(next@15.5.7)(react@19.1.0)
+        version: 5.0.0-beta.28(next@15.5.9)(react@19.1.0)
       next-themes:
         specifier: ^0.4.6
         version: 0.4.6(react-dom@19.1.0)(react@19.1.0)
@@ -1622,8 +1622,8 @@ packages:
     dev: false
     optional: true
 
-  /@next/env@15.5.7:
-    resolution: {integrity: sha512-4h6Y2NyEkIEN7Z8YxkA27pq6zTkS09bUSYC0xjd0NpwFxjnIKeZEeH591o5WECSmjpUhLn3H2QLJcDye3Uzcvg==}
+  /@next/env@15.5.9:
+    resolution: {integrity: sha512-4GlTZ+EJM7WaW2HEZcyU317tIQDjkQIyENDLxYJfSWlfqguN+dHkZgyQTV/7ykvobU7yEH5gKvreNrH4B6QgIg==}
     dev: false
 
   /@next/eslint-plugin-next@15.3.0:
@@ -4885,7 +4885,7 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /next-auth@5.0.0-beta.28(next@15.5.7)(react@19.1.0):
+  /next-auth@5.0.0-beta.28(next@15.5.9)(react@19.1.0):
     resolution: {integrity: sha512-2RDR1h3DJb4nizcd5UBBwC2gtyP7j/jTvVLvEtDaFSKUWNfou3Gek2uTNHSga/Q4I/GF+OJobA4mFbRaWJgIDQ==}
     peerDependencies:
       '@simplewebauthn/browser': ^9.0.1
@@ -4902,7 +4902,7 @@ packages:
         optional: true
     dependencies:
       '@auth/core': 0.39.1(nodemailer@6.9.0)
-      next: 15.5.7(react-dom@19.1.0)(react@19.1.0)
+      next: 15.5.9(react-dom@19.1.0)(react@19.1.0)
       react: 19.1.0
     dev: false
 
@@ -4916,8 +4916,8 @@ packages:
       react-dom: 19.1.0(react@19.1.0)
     dev: false
 
-  /next@15.5.7(react-dom@19.1.0)(react@19.1.0):
-    resolution: {integrity: sha512-+t2/0jIJ48kUpGKkdlhgkv+zPTEOoXyr60qXe68eB/pl3CMJaLeIGjzp5D6Oqt25hCBiBTt8wEeeAzfJvUKnPQ==}
+  /next@15.5.9(react-dom@19.1.0)(react@19.1.0):
+    resolution: {integrity: sha512-agNLK89seZEtC5zUHwtut0+tNrc0Xw4FT/Dg+B/VLEo9pAcS9rtTKpek3V6kVcVwsB2YlqMaHdfZL4eLEVYuCg==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -4937,7 +4937,7 @@ packages:
       sass:
         optional: true
     dependencies:
-      '@next/env': 15.5.7
+      '@next/env': 15.5.9
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001713
       postcss: 8.4.31
