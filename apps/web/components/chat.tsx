@@ -95,7 +95,6 @@ const faqs = [
 
 function findAnswer(userQuestion: string) {
 	const lowerQ = userQuestion.toLowerCase();
-	// Try keyword match
 	for (const faq of faqs) {
 		if (faq.keywords && faq.keywords.some((word) => lowerQ.includes(word))) {
 			return faq.answer;

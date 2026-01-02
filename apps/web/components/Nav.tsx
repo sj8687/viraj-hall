@@ -30,7 +30,6 @@ export function Navbar() {
   }
 
 
-  // animation
   useEffect(() => {
     if (!t1.current) {
       t1.current = gsap.timeline({ paused: true });
@@ -86,7 +85,6 @@ export function Navbar() {
 
 
 
-  // cursor animation
 
   useEffect(() => {
     const cursor = document.querySelector(".cursor");
@@ -186,7 +184,6 @@ export function Navbar() {
         </div>
 
         <div className="space-x-2 sm:space-x-3 flex justify-center menus items-center">
-          {/* Only render after session is loaded */}
           {status === "loading" ? null : (
             <>
               {authData && authData.user?.role !== "admin" && (

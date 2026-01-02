@@ -1,6 +1,4 @@
 
-// components/Footer.tsx
-
 import Link from 'next/link';
 import { FaInstagram, FaTwitter, FaWhatsapp, FaFacebook } from 'react-icons/fa';
 import { HiMail } from 'react-icons/hi';

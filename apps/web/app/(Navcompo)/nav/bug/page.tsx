@@ -1,4 +1,3 @@
-// app/bug-report/page.tsx
 // 'use client';
 
 import BugReport from '@/components/BugReport';

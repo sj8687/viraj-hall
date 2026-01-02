@@ -28,11 +28,10 @@ const Services = () => {
                         </p>
                     </div>
 
-                    {/* Services Sectin */}
+
                     <div className="space-y-16">
                         <div className="relative">
                             <div className="absolute w-[95%] h-[60%] top-16 left-14 bg-orange-200 opacity-50 rounded-full blur-[100px] z-[-1]"></div>
-                            {/* Catering */}
                             <div className="flex flex-col md:flex-row gap-8 items-start">
                                 <div className="md:w-1/2">
                                     <h2 className="text-2xl font-semibold text-orange-600 mb-2">🍽 Premium Catering</h2>
@@ -47,7 +46,7 @@ const Services = () => {
 
                             <div className="flex flex-col-reverse md:flex-row mt-7 gap-8 items-start">
                                 <div className="relative w-full md:w-1/2 h-64 rounded-xl overflow-hidden shadow-md">
-                                    <Image src="/decor1.jpg" alt="Decor" className="object-cover" fill />
+                                    <Image src="/decor1.WEBP" alt="Decor" className="object-cover" fill />
                                 </div>                                <div className="md:w-1/2">
                                     <h2 className="text-2xl font-semibold text-orange-600 mb-2">🎉 Thematic Decor</h2>
                                     <p className="text-gray-700 text-[17px] font-medium leading-relaxed">
@@ -71,7 +70,7 @@ const Services = () => {
 
                             <div className="flex flex-col-reverse md:flex-row  mt-7 gap-8 items-start">
                                 <div className="relative w-full md:w-1/2 h-64 rounded-xl overflow-hidden shadow-md">
-                                    <Image src="/marr.jpg" alt="Marriage Planning" className="object-cover" fill />
+                                    <Image src="/marr.WEBP" alt="Marriage Planning" className="object-cover" fill />
                                 </div>                                <div className="md:w-1/2">
                                     <h2 className="text-2xl font-semibold text-orange-600 mb-2">💍 Expert Wedding Planning</h2>
                                     <p className="text-gray-700  text-[17px] font-medium leading-relaxed">

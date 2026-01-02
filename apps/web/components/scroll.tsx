@@ -41,7 +41,6 @@ const InfiniteIconScroll = () => {
 
   return (
     <div className="w-full overflow-hidden mt-20 px-4 sm:px-8">
-      {/* bg removed as per your request */}
       <div className="relative w-full overflow-hidden">
         <div
           ref={scrollerRef}

@@ -89,7 +89,7 @@ export function Services() {
             description: "elegent venue,",
         },
         {
-            src: "/bir.jpg",
+            src: "/birthday.webp",
             title: "birthday celebration",
             description: "great food",
         },
