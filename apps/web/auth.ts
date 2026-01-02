@@ -162,13 +162,7 @@ const config: NextAuthConfig = {
         sameSite: process.env.AUTH_ENV === "development" ? "lax" : "lax",
         path: "/",
         secure: process.env.AUTH_ENV === "development" ? false : true,
-        domain:
-          process.env.DOCKER == "true"
-            ? "localhost"
-            : process.env.AUTH_ENV === "production"
-              ? ".virajmultipurposehall.site"
-              : undefined,
-
+        domain:".virajmultipurposehall.site",
       },
     },
   },
